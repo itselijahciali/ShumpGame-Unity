@@ -89,3 +89,5 @@ node_modules/            # Node.js dependencies
 # This .gitignore is intended as a repo-wide baseline.
 # Engine-specific rules (Unity, Unreal) should still go in their respective project folders.
 # Files ignored here are OS / IDE / log related and should never be committed.
+
+/assets/Textures/PSD/
