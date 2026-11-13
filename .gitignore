@@ -11,7 +11,7 @@ Desktop.ini              # Windows folder settings
 $RECYCLE.BIN/            # Windows recycle bin
 ehthumbs.db              # Windows media cache
 Icon?                    # Custom folder icons
-.DS_Store                # macOS folder metadata (cross-platform projects)
+.DS_Store
 *.lnk                    # Windows shortcut files
 
 # ---------------------------------------------------------
