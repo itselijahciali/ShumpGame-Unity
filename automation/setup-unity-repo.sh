@@ -6,22 +6,9 @@ set -e
 echo "===================================================="
 echo "          UNITY REPOSITORY INITIALIZATION           "
 echo "===================================================="
-# ---------------------------------------------------------
-# SECTION 1: SETTING UP GIT LFS
-# ---------------------------------------------------------
-echo ""
-echo ">>> SECTION 2: Initializing Git LFS..."
-
-if command -v git-lfs &> /dev/null; then
-    git lfs install --skip-repo
-    echo "✅ SUCCESS: Git LFS hooks and filters initialized."
-else
-    echo "⚠️  WARNING: Git LFS is not installed on this system."
-    echo "    Please download and install it from https://git-lfs.com/"
-fi
 
 # ---------------------------------------------------------
-# SECTION 2: SETTING GIT AUTOMATION (BRANCH & COMMIT RULES)
+# SECTION 1: SETTING GIT AUTOMATION (BRANCH & COMMIT RULES)
 # ---------------------------------------------------------
 echo ""
 echo ">>> SECTION 1: Setting up Git Automation..."
@@ -41,17 +28,11 @@ else
     exit 1
 fi
 
-
-
 # ---------------------------------------------------------
-# SECTION 3: SETTING UP UNITY YML MERGE (SMARTMERGE)
+# SECTION 2: SETTING UP UNITY YML MERGE (SMARTMERGE)
 # ---------------------------------------------------------
 echo ""
 echo ">>> SECTION 2: Configuring Unity YAML Merge..."
-
-read -p "   Enter Drive Letter where Unity is installed [C]: " drive
-drive="${drive:-C}"
-drive=${drive^^} 
 
 read -p "   Enter Unity Version (e.g., 6000.3.6f1): " version
 
@@ -60,22 +41,46 @@ if [ -z "$version" ]; then
     exit 1
 fi
 
-UNITY_PATH="${drive}:/Program Files/Unity/Hub/Editor/$version/Editor/Data/Tools/UnityYAMLMerge.exe"
+UNITY_PATH="/Applications/Unity/Hub/Editor/$version/Unity.app/Contents/Helpers/UnityYAMLMerge"
 
 if [ ! -f "$UNITY_PATH" ]; then
-    echo "   ❌ ERROR: UnityYAMLMerge.exe not found at:"
+    echo "   ❌ ERROR: UnityYAMLMerge not found at:"
     echo "      $UNITY_PATH"
+    echo ""
+    echo "   Installed Unity versions:"
+    
+    if [ -d "/Applications/Unity/Hub/Editor" ]; then
+        ls -1 "/Applications/Unity/Hub/Editor"
+    else
+        echo "      Unity Hub editor directory was not found."
+    fi
+
     exit 1
 fi
 
-echo "   Found tool at: $UNITY_PATH"
+if [ ! -x "$UNITY_PATH" ]; then
+    echo "   ⚠️  UnityYAMLMerge exists but is not marked executable."
+    echo "      Attempting to fix permissions..."
+    chmod +x "$UNITY_PATH"
+fi
 
-# Updating local Git configuration
+echo "   Found tool at:"
+echo "      $UNITY_PATH"
+
+# ---------------------------------------------------------
+# CONFIGURE LOCAL GIT MERGE DRIVER
+# ---------------------------------------------------------
+
 git config merge.unityyamlmerge.name "Unity SmartMerge"
-git config merge.unityyamlmerge.driver "\"$UNITY_PATH\" merge -p \"\$BASE\" \"\$REMOTE\" \"\$LOCAL\" \"\$MERGED\""
+
+git config merge.unityyamlmerge.driver \
+    "\"$UNITY_PATH\" merge -p \"\$BASE\" \"\$REMOTE\" \"\$LOCAL\" \"\$MERGED\""
+
 git config merge.unityyamlmerge.trustExitCode true
 
-git config mergetool.unityyamlmerge.cmd "\"$UNITY_PATH\" merge -p \"\$BASE\" \"\$REMOTE\" \"\$LOCAL\" \"\$MERGED\""
+git config mergetool.unityyamlmerge.cmd \
+    "\"$UNITY_PATH\" merge -p \"\$BASE\" \"\$REMOTE\" \"\$LOCAL\" \"\$MERGED\""
+
 git config mergetool.unityyamlmerge.trustExitCode true
 git config mergetool.keepBackup false
 git config mergetool.keepTemporaries false
