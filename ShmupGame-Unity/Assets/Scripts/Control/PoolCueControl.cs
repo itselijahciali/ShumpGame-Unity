@@ -27,6 +27,7 @@ public class PoolCueControl : MonoBehaviour
     [Header("References")]
     [SerializeField] private Rigidbody cueBallRb;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private GameManager gameManager;
 
     [Header("Aiming")]
     [SerializeField] private float maxPitch = 45f;
@@ -85,7 +86,7 @@ public class PoolCueControl : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Mouse.current == null)
+        if (gameManager.IsGameOver || cueBallRb == null) // Pockets delete ball
             return;
 
         switch (state)
@@ -184,7 +185,9 @@ public class PoolCueControl : MonoBehaviour
         // Move towards ball
         yield return MoveCue(hitPosition, Mathf.Lerp(0.15f, 0.05f, charge)
         );
-
+        
+        gameManager.StartGame(); // Only runs once, game starts on first hit
+        
         // Hit ball
         cueBallRb.AddForce(shotDirection * charge * maxShotSpeed, ForceMode.VelocityChange
         );
@@ -208,7 +211,7 @@ public class PoolCueControl : MonoBehaviour
             elapsed += Time.deltaTime;
 
             float t = elapsed / duration;
-
+            
             transform.position = Vector3.Lerp(start, target, t);
 
             yield return null;

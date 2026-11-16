@@ -21,20 +21,21 @@ public class PoolBall : MonoBehaviour
 {
     #region Fields & Properties
 
-    [SerializeField] private MeshRenderer ballRenderer;
-    
-    public int Number { get; private set; }
-
     // Declare serialized fields and private variables here
+
+    [SerializeField] private MeshRenderer ballRenderer; // Access materials
+    
+    public int Number { get; private set; } // Define the point value for ball
 
     #endregion
 
-    // Awake is called once on initialization
+    // Called by GameManager
     public void Initialize(int number, Material material)
     {
         Number = number;
         ballRenderer.sharedMaterial = material;
 
+        // Add slight rotation on fall
         GetComponent<Rigidbody>().AddForce(
             new Vector3(
                 Random.Range(-0.3f, 0.3f),
@@ -46,5 +47,4 @@ public class PoolBall : MonoBehaviour
         GetComponent<Rigidbody>().maxAngularVelocity = 200f;
     }
     
-
 }//end PoolBall

@@ -11,7 +11,7 @@
 *
 ************************************************************/
 
-using UnityEditor.PackageManager;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 
@@ -29,7 +29,6 @@ public class BallSpawn : MonoBehaviour
     [SerializeField] private int maxBalls = 10;
 
     [SerializeField] private BoxCollider spawnArea;
-    [SerializeField] private LayerMask ballLayer;
     
     private int currBalls = 0;
 
@@ -38,11 +37,10 @@ public class BallSpawn : MonoBehaviour
 
    #region Initialization & Activation
 
-    // Start is called once before the first Update
-    private void Start()
-    {
-        InvokeRepeating(nameof(SpawnBall), 0f, spawnInterval);
-    }//end Start()
+   public void StartSpawn()
+   {
+       InvokeRepeating(nameof(SpawnBall), 0f, spawnInterval);
+   }
     
    #endregion
    
@@ -53,28 +51,27 @@ public class BallSpawn : MonoBehaviour
             return;
 
         Bounds bounds = spawnArea.bounds;
-
-        for (int i = 0; i < 20; i++)
-        {
-            Vector3 position = new Vector3(Random.Range(bounds.min.x, bounds.max.x), bounds.center.y, Random.Range(bounds.min.z, bounds.max.z));
-            if (Physics.CheckSphere(position, 0.055f, ballLayer, QueryTriggerInteraction.Ignore))
-            {
-                continue;
-            }
             
-            int index = Random.Range(0, ballMaterials.Length);
+        // Spawn within bounds (just an empty with a box collider)
+        Vector3 position = new Vector3(Random.Range(bounds.min.x, bounds.max.x), bounds.center.y, Random.Range(bounds.min.z, bounds.max.z));
+        // Originally checked if colliding with ball by using a ball layer but they all spawn above so it'll never spawn inside another ball
+        
+        int index = Random.Range(0, ballMaterials.Length);
 
-            PoolBall ball = Instantiate(ballPrefab, position, Quaternion.identity);
+        PoolBall ball = Instantiate(ballPrefab, position, Quaternion.identity);
 
-            ball.Initialize(index + 1, ballMaterials[index]);
+        ball.Initialize(index + 1, ballMaterials[index]);
 
-            currBalls++;
-
-            return;
-        }
+        currBalls++;
     }//end CustomMethod(int)
 
     #endregion
+    
+    // Called by PocketCollision to keep track of how many balls are present. Maybe number of balls should be inside GameManager?
+    public void BallPocketed()
+    {
+        currBalls--;
+    }//end BallPocketed()
     
 
 }//end BallSpawn
