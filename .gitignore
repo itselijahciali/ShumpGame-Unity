@@ -91,3 +91,4 @@ node_modules/            # Node.js dependencies
 # Files ignored here are OS / IDE / log related and should never be committed.
 
 /assets/Textures/PSD/
+Build/
