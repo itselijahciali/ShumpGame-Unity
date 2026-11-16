@@ -1,22 +1,23 @@
 /************************************************************
-* COPYRIGHT:  Year
-* PROJECT:    Name of Project or Assignment
+* COPYRIGHT:  2026
+* PROJECT:    ShmupGame
 * FILE NAME:  BallSpawn.cs
-* DESCRIPTION: What project or system does this file belong to?
-*                    
+* DESCRIPTION: Ball Spawner
+* 
 * REVISION HISTORY:
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
-* 2000/01/01 | Your Name | Created class
+* 2026/11/04 | Elijah Ciali | Created class
 *
 ************************************************************/
+
 
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 
 /// <summary>
-/// What does this specific class do when I reference it in C#?
+/// Manages ball spawning in gameplay
 /// </summary>
 public class BallSpawn : MonoBehaviour
 {

@@ -1,13 +1,13 @@
 /************************************************************
-* COPYRIGHT:  Year
-* PROJECT:    Name of Project or Assignment
-* FILE NAME:  NewMonoBehaviourScript.cs
-* DESCRIPTION: What project or system does this file belong to?
-*                    
+* COPYRIGHT:  2026
+* PROJECT:    ShmupGame
+* FILE NAME:  PoolCueControl.cs
+* DESCRIPTION: Control logic for Pool Cue
+* 
 * REVISION HISTORY:
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
-* 2000/01/01 | Your Name | Created class
+* 2026/11/04 | Elijah Ciali | Created class
 *
 ************************************************************/
 
@@ -17,7 +17,7 @@ using UnityEngine.InputSystem;
 
 
 /// <summary>
-/// What does this specific class do when I reference it in C#?
+/// Controls the pool cue.
 /// </summary>
 public class PoolCueControl : MonoBehaviour
 {
@@ -222,5 +222,4 @@ public class PoolCueControl : MonoBehaviour
     
     #endregion
     
-
-}//end NewMonoBehaviourScript
+}//end PoolCueControl

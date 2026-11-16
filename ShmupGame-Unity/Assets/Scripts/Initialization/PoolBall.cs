@@ -1,13 +1,13 @@
 /************************************************************
-* COPYRIGHT:  Year
-* PROJECT:    Name of Project or Assignment
+* COPYRIGHT:  2026
+* PROJECT:    ShmupGame
 * FILE NAME:  PoolBall.cs
-* DESCRIPTION: What project or system does this file belong to?
-*                    
+* DESCRIPTION: Initialization logic for Pool Ball
+* 
 * REVISION HISTORY:
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
-* 2000/01/01 | Your Name | Created class
+* 2026/11/04 | Elijah Ciali | Created class
 *
 ************************************************************/
 
@@ -15,7 +15,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// What does this specific class do when I reference it in C#?
+/// Adds material and points for pool ball lifecycle
 /// </summary>
 public class PoolBall : MonoBehaviour
 {

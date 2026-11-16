@@ -1,13 +1,13 @@
 /************************************************************
-* COPYRIGHT:  Year
-* PROJECT:    Name of Project or Assignment
+* COPYRIGHT:  2026
+* PROJECT:    ShmupGame
 * FILE NAME:  MouseCameraControl.cs
-* DESCRIPTION: What project or system does this file belong to?
-*                    
+* DESCRIPTION: Control logic for Mouse Control
+* 
 * REVISION HISTORY:
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
-* 2000/01/01 | Your Name | Created class
+* 2026/11/04 | Elijah Ciali | Created class
 *
 ************************************************************/
 
@@ -16,7 +16,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// What does this specific class do when I reference it in C#?
+/// Moves camera with slight parralax according to mouse
 /// </summary>
 public class MouseCameraControl : MonoBehaviour
 {
@@ -68,5 +68,4 @@ public class MouseCameraControl : MonoBehaviour
 
     #endregion
     
-
 }//end MouseCameraControl

@@ -1,13 +1,13 @@
 /************************************************************
-* COPYRIGHT:  Year
-* PROJECT:    Name of Project or Assignment
+* COPYRIGHT:  2026
+* PROJECT:    ShmupGame
 * FILE NAME:  GameManager.cs
-* DESCRIPTION: What project or system does this file belong to?
-*                    
+* DESCRIPTION: Game loop management
+* 
 * REVISION HISTORY:
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
-* 2000/01/01 | Your Name | Created class
+* 2026/11/04 | Elijah Ciali | Created class
 *
 ************************************************************/
 
@@ -17,7 +17,7 @@ using UnityEngine.SceneManagement;
 
 
 /// <summary>
-/// What does this specific class do when I reference it in C#?
+/// Manages points and game state
 /// </summary>
 public class GameManager : MonoBehaviour
 {
